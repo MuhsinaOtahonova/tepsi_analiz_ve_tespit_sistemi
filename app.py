@@ -7,7 +7,7 @@ import io
 app = Flask(__name__)
 
 # YOLO modelini yükle
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='model/best (1).pt') 
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='model/best.pt') 
 
 @app.route('/predict', methods=['POST'])
 def predict():
