@@ -106,8 +106,6 @@ class _HomePageState extends State<HomePage> {
 
   // Menü türünü belirleme
   String getMenuType() {
-    int anaYemekCount =
-        detectedFood.where((food) => food['type'] == 'Ana yemek').length;
     int yardimciYemekCount =
         detectedFood.where((food) => food['type'] == 'Yardımcı yemek').length;
     int ekmekCount = detectedFood.where((food) => food['type'] == '-').length;
@@ -132,11 +130,15 @@ class _HomePageState extends State<HomePage> {
       return 'Menü 3';
     }
     // Fix Menü için koşul
-    else if (anaYemekCount == 1 && yardimciYemekCount == 3) {
+    else if (etsizYemekCount == 0 && yardimciYemekCount == 0) {
+      return 'Fix Menü';
+    } else if (etliYemekCount == 1 && yardimciYemekCount == 1) {
       return 'Fix Menü';
     }
     // Menü 1 için koşul
-    else if (anaYemekCount == 1 && yardimciYemekCount == 1 && ekmekCount == 1) {
+    else if (etliYemekCount == 1 &&
+        yardimciYemekCount == 1 &&
+        ekmekCount == 1) {
       return 'Menü 1';
     }
     return 'Menü Değil';
@@ -149,6 +151,8 @@ class _HomePageState extends State<HomePage> {
       int etsizYemekCount = detectedFood
           .where((food) => food['type'] == 'Etsiz ana yemek')
           .length;
+      int etliYemekCount =
+          detectedFood.where((food) => food['type'] == 'Etli ana yemek').length;
       int suCount = detectedFood.where((food) => food['type'] == 'Su').length;
       int ekmekCount = detectedFood.where((food) => food['type'] == '-').length;
       int yardimciYemekCount =
